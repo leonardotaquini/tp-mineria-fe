@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { getGenders, getLocations, getStudies } from "../helpers/form.axios";
 import { useEffect } from "react";
+import { subjects } from "../helpers/subjects";
+
 const Form = () => {
   const [values, setValues] = useState({
     location: [],
@@ -27,7 +29,7 @@ const Form = () => {
     <>
       <form className="p-5 shadow col-11 col-sm-7 col-lg-5 border m-auto">
 
-        <label>Localidad</label>
+        <label className="form-label text-primary">Localidad</label>
         <select className="form-control">
           <option>Seleccione</option>
           {
@@ -47,7 +49,7 @@ const Form = () => {
           }
         </select>
 
-        <label>Genero</label>
+        <label className="form-label text-primary">Genero</label>
         <select className="form-control">
           <option>Seleccione</option>
           {
@@ -58,9 +60,14 @@ const Form = () => {
         </select>
 
 
-          <label>¿Cual es el area académica que considerás mas importante?</label>
-          <select>
-            <option value=""></option>
+          <label className="form-label text-primary">¿Cual es el area académica que considerás mas importante?</label>
+          <select className="form-control">
+            <option>Seleccione</option>
+            {
+              subjects.map((subject, i) => (
+                <option key={i}>{subject}</option>
+              ))
+            }
           </select>
         
       </form>

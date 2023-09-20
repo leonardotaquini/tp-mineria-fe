@@ -1,13 +1,16 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Form from "./components/Form";
+import Home from "./pages/Home";
+
 
 function App() {
   return (
     <>
-      <main className="d-flex flex-column vh-100 bg-light">
-        <h1 className="text-center">Encuesta IPF</h1>
-        <Form />
-      </main>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />    
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
