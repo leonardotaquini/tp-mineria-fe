@@ -1,6 +1,7 @@
 import axios from "axios";
 
 
+
 const baseURL = 'http://localhost:3000';
 
 const getLocations = async() => {
@@ -11,7 +12,7 @@ const getLocations = async() => {
         }
         return locations;
     } catch (error) {
-        
+        console.log(error);
     }
 }
 
@@ -31,4 +32,16 @@ const getGenders = async() => {
     return genders;
 }
 
-export { getLocations, getStudies, getGenders };
+const sendForm = async(encuesta) => {
+    try {
+        const res = await axios.post(`${baseURL}/api/survey`, encuesta);
+        if(res.status !== 201){
+            throw new Error({title: 'Error', message: `${res.status} - ${res.statusText}`});
+        }
+        return res;
+    }catch(error){
+        return error;
+    }
+}
+
+export { getLocations, getStudies, getGenders, sendForm };
