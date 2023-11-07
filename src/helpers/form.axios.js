@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 
-const baseURL = 'http://localhost:3000';
+const baseURL = 'https://encuesta-mineria-caso-1.onrender.com';
 
 const getLocations = async() => {
     try {

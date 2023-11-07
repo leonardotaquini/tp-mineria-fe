@@ -72,7 +72,7 @@ const Form = () => {
         <div className="col-12 col-sm-12 col-md-10 col-lg-12 mb-4">  
           <label className="form-label text-primary">Localidad</label>
           <select className="form-control" {...register("idLocation", {required: true}) }>
-            <option>Seleccione</option>
+            
             {
               values.idLocation.map((location) => (
                   <option key={location.id} value={location.id}>{location.name}</option>
@@ -82,7 +82,7 @@ const Form = () => {
 
           <label className="form-label text-primary">Estudios</label>
           <select className="form-control" {...register("idStudy", {required: true}) }>
-            <option>Seleccione</option>
+            
             {
               values.idStudy.map((study) => (
                   <option key={study.id} value={study.id}>{study.studyNivel}</option>
@@ -92,7 +92,7 @@ const Form = () => {
 
           <label className="form-label text-primary">Genero</label>
           <select className="form-control" {...register("idGender", {required: true}) }>
-            <option>Seleccione</option>
+            
             {
               values.idGender.map((gender) => (
                   <option key={gender.id} value={gender.id}>{gender.gender}</option>
@@ -107,7 +107,7 @@ const Form = () => {
         <div className="col-12 col-sm-12 col-md-10 col-lg-6 ">
           <label className="form-label text-primary small">¿Cual es el area académica que conciderás más importante?</label>
           <select className="form-control my-2" {...register("answerOne", {required: true}) }>
-            <option >Seleccione</option>
+            
             {
               subjects.map((subject, i) => (
                 <option key={i}>{subject}</option>
@@ -117,7 +117,7 @@ const Form = () => {
 
           <label className="form-label text-primary small">¿Cuál es tu nivel de satisfacción con la variedad de materias ofrecidas en tu área de estudio?</label>
           <select  className="form-control my-2" id="" {...register("answerTwo", {required: true}) }>
-            <option  >Seleccione</option>
+            
             <option value="Satisfecho">Satisfecho</option>
             <option value="Muy satisfecho">Muy satisfecho</option>
             <option value="Neutral">Neutral</option>
@@ -127,7 +127,7 @@ const Form = () => {
 
           <label className="form-label text-primary small">Desde tu perspectiva ¿Cuál es la materia menos relevante para el cursado?</label>
           <select className="form-control my-2" {...register("answerThree", {required: true}) }>
-            <option >Seleccione</option>
+            
             {
               subjects.map((subject, i) => (
                 <option key={i}>{subject}</option>
@@ -137,7 +137,7 @@ const Form = () => {
 
           <label className="form-label text-primary small">¿Cómo describirías la comunicación entre los estudiantes y los departamentos académicos?</label>
           <select  className="form-control my-2" {...register("answerFour", {required: true}) }>
-            <option >Seleccione</option>
+            
             <option value="eficiente">Eficiente y efectiva</option>
             <option value="aceptable">Aceptable pero podria mejorar</option>
             <option value="insatisfactoria">Insatisfactoria</option>
@@ -148,7 +148,7 @@ const Form = () => {
 
           <label className="form-label text-primary small">¿Qué materia crees que requiere más carga horaria en el cursado? </label>
           <select className="form-control my-2" {...register("answerFive", {required: true}) }>
-            <option  >Seleccione</option>
+            
             {
               subjects.map((subject, i) => (
                 <option key={i}>{subject}</option>
@@ -156,9 +156,9 @@ const Form = () => {
             }
           </select>
 
-          <label className="form-label text-primary small">En tu opinión, ¿Cuál es la agnatura que debería tener menos carga horaria?</label>
+          <label className="form-label text-primary small">En tu opinión, ¿Cuál es la asignatura que debería tener menos carga horaria?</label>
           <select className="form-control my-2" {...register("answerSix", {required: true}) }>
-            <option  >Seleccione</option>
+            
             {
               subjects.map((subject, i) => (
                 <option key={i}>{subject}</option>
@@ -168,14 +168,14 @@ const Form = () => {
 
           <label className="form-label text-primary small">¿Que modalidad de cursado prefieres?</label>
           <select  className="form-control my-2" id="" {...register("answerSeven", {required: true}) }>
-            <option >Seleccione</option>
+            
             <option value="Presencial">Presencial</option>
             <option value="Mixto">Mixto</option>
             <option value="Virtual">Virtual</option>
           </select>
 
           <label className="form-label text-primary small">¿Tienes alguna sugerencia específica para mejorar el plan académico? </label>
-          <input type="text" className="form-control my-2" {...register("answerEight", {required: true}) } />
+          <input type="text" className="form-control my-2" {...register("answerEight", {required: true, minLength: 20, maxLength:250}) } />
         </div>
 
           
