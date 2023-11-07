@@ -34,14 +34,15 @@ const Form = () => {
       title: 'Error al enviar la encuesta',
       text: `${respuesta.status} - ${respuesta.statusText}`,
      });
+    }else{
+      Swal.fire({
+        icon: 'success',
+        title: 'Encuesta enviada',
+        text: 'Gracias por participar',
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
-    Swal.fire({
-      icon: 'success',
-      title: 'Encuesta enviada',
-      text: 'Gracias por participar',
-      showConfirmButton: false,
-      timer: 1500
-    });
     console.log(respuesta)
     reset();
 }
@@ -72,7 +73,7 @@ const Form = () => {
         <div className="col-12 col-sm-12 col-md-10 col-lg-12 mb-4">  
           <label className="form-label text-primary">Localidad</label>
           <select className="form-control" {...register("idLocation", {required: true}) }>
-            <option value="Formosa" selected>Formosa</option>
+            <option value="61" selected>Formosa</option>
             {
               values.idLocation.map((location) => (
                   <option key={location.id} value={location.id}>{location.name}</option>
