@@ -72,7 +72,7 @@ const Form = () => {
         <div className="col-12 col-sm-12 col-md-10 col-lg-12 mb-4">  
           <label className="form-label text-primary">Localidad</label>
           <select className="form-control" {...register("idLocation", {required: true}) }>
-            
+            <option value="Formosa" selected>Formosa</option>
             {
               values.idLocation.map((location) => (
                   <option key={location.id} value={location.id}>{location.name}</option>
