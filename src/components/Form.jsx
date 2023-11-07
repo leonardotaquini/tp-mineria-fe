@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import Swal from "sweetalert2";
 import './form.css';
 const Form = () => {
+  
   const [values, setValues] = useState({
     idLocation: [],
     idStudy: [],
@@ -24,7 +25,7 @@ const Form = () => {
 
   const {register, handleSubmit, formState: { errors }, reset, getValues } = useForm({ defaultValues: values });
 
-
+  
   const onSubmit =  async(encuesta) => {
    const respuesta = await sendForm(encuesta);
    if(respuesta.status !== 201){
@@ -40,7 +41,8 @@ const Form = () => {
       text: 'Gracias por participar',
       showConfirmButton: false,
       timer: 1500
-    })
+    });
+    console.log(respuesta)
     reset();
 }
 
@@ -59,6 +61,10 @@ const Form = () => {
   useEffect(() => {
     getValuesDB();
   }, []);
+
+  
+
+
 
   return (
     <div className="container-fluid col-12 col-sm-8  col-lg-10 formulario rounded my-3">
@@ -95,13 +101,13 @@ const Form = () => {
           </select>
           
           <label className="form-label text-primary">Edad</label>
-          <input type="number" className="form-control" {...register("age", {required: true}) } />
+          <input type="number" className="form-control" {...register("age", {required: true, min: 17, max: 40}) } />
         </div>
 
         <div className="col-12 col-sm-12 col-md-10 col-lg-6 ">
-          <label className="form-label text-primary small">¿Cual es el area académica que considerás mas importante?</label>
+          <label className="form-label text-primary small">¿Cual es el area académica que conciderás más importante?</label>
           <select className="form-control my-2" {...register("answerOne", {required: true}) }>
-            <option>Seleccione</option>
+            <option >Seleccione</option>
             {
               subjects.map((subject, i) => (
                 <option key={i}>{subject}</option>
@@ -109,26 +115,64 @@ const Form = () => {
             }
           </select>
 
-          <label className="form-label text-primary small">¿Qué razón te llevo a elegir esta materia en particular?</label>
-          <input type="text" className="form-control my-2" {...register("answerTwo", {required: true}) } />
+          <label className="form-label text-primary small">¿Cuál es tu nivel de satisfacción con la variedad de materias ofrecidas en tu área de estudio?</label>
+          <select  className="form-control my-2" id="" {...register("answerTwo", {required: true}) }>
+            <option  >Seleccione</option>
+            <option value="Satisfecho">Satisfecho</option>
+            <option value="Muy satisfecho">Muy satisfecho</option>
+            <option value="Neutral">Neutral</option>
+            <option value="Insatisfecho">Insatisfecho</option>
+            <option value="Muy insatisfecho">Muy insatisfecho</option>
+          </select>
 
           <label className="form-label text-primary small">Desde tu perspectiva ¿Cuál es la materia menos relevante para el cursado?</label>
-          <input type="text" className="form-control my-2" {...register("answerThree", {required: true}) } />
+          <select className="form-control my-2" {...register("answerThree", {required: true}) }>
+            <option >Seleccione</option>
+            {
+              subjects.map((subject, i) => (
+                <option key={i}>{subject}</option>
+              ))
+            }
+          </select>
 
-          <label className="form-label text-primary small">¿Crees que se debería agregar alguna materia adicional al cursado? </label>
-          <input type="text" className="form-control my-2" {...register("answerFour", {required: true}) } />
+          <label className="form-label text-primary small">¿Cómo describirías la comunicación entre los estudiantes y los departamentos académicos?</label>
+          <select  className="form-control my-2" {...register("answerFour", {required: true}) }>
+            <option >Seleccione</option>
+            <option value="eficiente">Eficiente y efectiva</option>
+            <option value="aceptable">Aceptable pero podria mejorar</option>
+            <option value="insatisfactoria">Insatisfactoria</option>
+          </select>
         </div>
 
         <div className="col-12 col-sm-12 col-md-10 col-lg-6 ">
 
           <label className="form-label text-primary small">¿Qué materia crees que requiere más carga horaria en el cursado? </label>
-          <input type="text" className="form-control my-2" {...register("answerFive", {required: true}) } />
+          <select className="form-control my-2" {...register("answerFive", {required: true}) }>
+            <option  >Seleccione</option>
+            {
+              subjects.map((subject, i) => (
+                <option key={i}>{subject}</option>
+              ))
+            }
+          </select>
 
-          <label className="form-label text-primary small">En tu opinión, ¿Cuál es la asignatura que debería tener menos carga horaria?</label>
-          <input type="text" className="form-control my-2" {...register("answerSix", {required: true}) } />
+          <label className="form-label text-primary small">En tu opinión, ¿Cuál es la agnatura que debería tener menos carga horaria?</label>
+          <select className="form-control my-2" {...register("answerSix", {required: true}) }>
+            <option  >Seleccione</option>
+            {
+              subjects.map((subject, i) => (
+                <option key={i}>{subject}</option>
+              ))
+            }
+          </select>
 
-          <label className="form-label text-primary small">¿Consideras que es esencial la posibilidad de cursar alguna materia de manera virtual?</label>
-          <input type="text" className="form-control my-2" {...register("answerSeven", {required: true}) } />
+          <label className="form-label text-primary small">¿Que modalidad de cursado prefieres?</label>
+          <select  className="form-control my-2" id="" {...register("answerSeven", {required: true}) }>
+            <option >Seleccione</option>
+            <option value="Presencial">Presencial</option>
+            <option value="Mixto">Mixto</option>
+            <option value="Virtual">Virtual</option>
+          </select>
 
           <label className="form-label text-primary small">¿Tienes alguna sugerencia específica para mejorar el plan académico? </label>
           <input type="text" className="form-control my-2" {...register("answerEight", {required: true}) } />
