@@ -5,7 +5,10 @@ import { subjects } from "../helpers/subjects";
 import { useForm } from 'react-hook-form';
 import Swal from "sweetalert2";
 import './form.css';
+import Loading from "./Loading";
 const Form = () => {
+
+  const [isLoading, setIsLoading] = useState(true);
   
   const [values, setValues] = useState({
     idLocation: [],
@@ -48,6 +51,7 @@ const Form = () => {
 }
 
   const getValuesDB = async () => {
+    
     const locations = await getLocations();
     const studies = await getStudies();
     const genders = await getGenders();
@@ -57,6 +61,7 @@ const Form = () => {
       idStudy: studies.data,
       idGender: genders.data,
     });
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -68,7 +73,13 @@ const Form = () => {
 
 
   return (
+
     <div className="container-fluid col-12 col-sm-8  col-lg-10 formulario rounded my-3">
+      {
+        isLoading ? (
+          <Loading />
+        )
+        :(
       <form className=" p-5  row  m-auto  justify-content-center align-items-center" onSubmit={handleSubmit(onSubmit)}>
         <div className="col-12 col-sm-12 col-md-10 col-lg-12 mb-4">  
           <label className="form-label text-primary">Localidad</label>
@@ -176,13 +187,16 @@ const Form = () => {
           </select>
 
           <label className="form-label text-primary small">¿Tienes alguna sugerencia específica para mejorar el plan académico? </label>
-          <input type="text" className="form-control my-2" {...register("answerEight", {required: true, minLength: 20, maxLength:250}) } />
+          <input type="text" className="form-control my-2" {...register("answerEight", {required: true, minLength: 15, maxLength:250}) } />
+          {errors.answerEight && <p className="text-danger">Debe tener minimo 20 caracteres y maximo 250</p>}
         </div>
 
           
 
         <button type="submit" className="btn btn-primary w-100 mt-3">Enviar</button>
       </form>
+        )
+      }
     </div>
   );
 };
